@@ -34,7 +34,7 @@ async function createTrip(formData: FormData) {
   } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/login')
+    redirect('/')
   }
 
   const destination = String(formData.get('destination') ?? '').trim()
