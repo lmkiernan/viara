@@ -26,7 +26,7 @@ async function updateTripHighlights(formData: FormData) {
   } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/login')
+    redirect('/')
   }
 
   const tripId = String(formData.get('tripId') ?? '').trim()
@@ -112,7 +112,7 @@ export default async function AddPastTripStep2Page({
   } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/login')
+    redirect('/')
   }
 
   if (!tripId) {

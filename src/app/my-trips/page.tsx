@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
+import { DeleteTripButton } from './delete-trip-button'
 
 const WARM_GRADIENTS = [
   { from: '#c8b09a', to: '#9a7a62' },
@@ -35,6 +36,7 @@ function TripCard({ trip, gradientIndex }: { trip: Trip; gradientIndex: number }
         style={{ background: `linear-gradient(145deg, ${grad.from}, ${grad.to})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+      <DeleteTripButton tripId={trip.id} />
       <div className="absolute bottom-0 left-0 right-0 p-4">
         <p className="text-white font-semibold text-base leading-snug">{trip.title}</p>
         {date && <p className="text-white/70 text-sm mt-0.5">{date}</p>}

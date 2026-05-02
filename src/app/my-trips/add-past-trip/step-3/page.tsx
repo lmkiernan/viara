@@ -57,7 +57,7 @@ export default async function AddPastTripStep3Page({
 
   const { data: trip, error: tripError } = await supabase
     .from('trips')
-    .select('id, destination, reflection_what_worked, reflection_what_to_change, reflection_do_instead')
+    .select('id, destination')
     .eq('id', tripId)
     .eq('user_id', user.id)
     .single()
@@ -120,7 +120,7 @@ export default async function AddPastTripStep3Page({
                     id="what_worked"
                     name="what_worked"
                     rows={3}
-                    defaultValue={trip.reflection_what_worked ?? ''}
+                    defaultValue=""
                     className="w-full rounded-xl border border-stone-200 bg-stone-50/60 px-4 py-3 text-stone-900 outline-none placeholder:text-stone-400 focus:border-stone-400 resize-none"
                   />
                 </div>
@@ -137,7 +137,7 @@ export default async function AddPastTripStep3Page({
                     id="what_to_change"
                     name="what_to_change"
                     rows={2}
-                    defaultValue={trip.reflection_what_to_change ?? ''}
+                    defaultValue=""
                     className="w-full rounded-xl border border-stone-200 bg-stone-50/60 px-4 py-3 text-stone-900 outline-none placeholder:text-stone-400 focus:border-stone-400 resize-none"
                   />
                 </div>
@@ -154,7 +154,7 @@ export default async function AddPastTripStep3Page({
                     id="do_instead"
                     name="do_instead"
                     rows={3}
-                    defaultValue={trip.reflection_do_instead ?? ''}
+                    defaultValue=""
                     className="w-full rounded-xl border border-stone-200 bg-stone-50/60 px-4 py-3 text-stone-900 outline-none placeholder:text-stone-400 focus:border-stone-400 resize-none"
                   />
                 </div>
