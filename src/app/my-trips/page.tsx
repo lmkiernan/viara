@@ -63,6 +63,14 @@ export default async function MyTripsPage() {
 
   if (profileError) console.error('Profile upsert failed:', profileError.message)
 
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('username')
+    .eq('id', user.id)
+    .maybeSingle()
+
+  if (!profile?.username) redirect('/profile/setup')
+
   const { data: trips, error: tripsError } = await supabase
     .from('trips')
     .select('*')
@@ -86,7 +94,6 @@ export default async function MyTripsPage() {
             { label: 'Discover', href: '/discover' },
             { label: 'Saved', href: '/saved' },
             { label: 'My Trips', href: '/my-trips', active: true },
-            { label: 'Profile', href: '/profile' },
           ].map((item) => (
             <Link
               key={item.label}
@@ -127,11 +134,14 @@ export default async function MyTripsPage() {
 
       {/* Main content */}
       <main className="flex-1 px-10 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">My Trips</h1>
-          <p className="mt-1.5 text-sm text-gray-500">
-            View all of your upcoming and past trips in one place.
-          </p>
+        <div className="flex items-start justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">My Trips</h1>
+            <p className="mt-1.5 text-sm text-gray-500">
+              View all of your upcoming and past trips in one place.
+            </p>
+          </div>
+          <span className="text-sm text-gray-400 mt-1">@{profile.username}</span>
         </div>
 
         {/* Upcoming Trips */}
